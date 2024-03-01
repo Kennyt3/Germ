@@ -40,17 +40,78 @@ input[type='email'] {
   border-radius: 5px;
 }
 
-button[type='submit'] {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100%;
-  font-size: 16px;
+.multi-step-form {
+  max-width: 400px;
+  margin: 0 auto;
 }
 
-button[type='submit']:hover {
+.form-step h2 {
+  margin-bottom: 10px;
+}
+
+.form-step button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.form-step button:hover {
   background-color: #0056b3;
+}
+
+.submit-button {
+  background-color: #0056b3;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+.but-con1 {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.but-con {
+  display: flex;
+  justify-content: space-between;
+}
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+  counter-reset: step;
+}
+#progressbar li {
+  list-style-type: none;
+  float: left;
+  width: 33.33%;
+  position: relative;
+  text-align: center;
+}
+#progressbar li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border: 2px solid #ddd;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: white;
+}
+#progressbar li:after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background-color: #ddd;
+  position: absolute;
+  left: -50%;
+  top: 15px;
+  z-index: -1;
 }
