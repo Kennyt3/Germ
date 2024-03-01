@@ -7,16 +7,39 @@ export default function Register() {
   const [email, setEmail] = useState('')
   const [referrer, setReferrer] = useState('')
   const [supervisor, setSupervisor] = useState('')
-  const [strasse, setStrasse] = useState('')
+  const [street, setStreet] = useState('')
   const [city, setCity] = useState('')
   const [iban, setIban] = useState('')
   const [superprovBerechtigt, setSuperprovBerechtigt] = useState('')
 
-  const handleClick = () => {}
+  const handleClick = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await fetch('/api/workers', {
+        method: 'POST',
+        body: JSON.stringify({
+          vorname,
+          nachname,
+          email,
+          referrer,
+          supervisor,
+          street,
+        }),
+        headers: { 'Content-Type': 'application/json' },
+      })
+
+      if (response.ok) {
+        alert('User registered')
+      }
+    } catch (error) {
+      console.error('Error:', error.message)
+      setErrMsg('Network error occurred')
+    }
+  }
   return (
     <div class='container'>
       <h2>Worker Registration Form</h2>
-      <form id='workerForm' action='#' method='POST'>
+      <form id='workerForm' onSubmit={handleClick} method='POST'>
         <div class='form-group'>
           <label for='firstName'>First Name:</label>
           <input
@@ -60,9 +83,18 @@ export default function Register() {
           <label for='city'>City:</label>
           <input
             type='text'
-            // name='city'
+            name='city'
             onChange={(e) => setCity(e.target.value)}
             value={city}
+          />
+        </div>
+        <div class='form-group'>
+          <label for='street'>Street:</label>
+          <input
+            type='text'
+            name='street'
+            onChange={(e) => setStreet(e.target.value)}
+            value={street}
           />
         </div>
         <button type='submit'>Submit</button>
