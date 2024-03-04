@@ -1,6 +1,8 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import React, { useState, useEffect } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Register() {
   const [vorname, setVorname] = useState('')
@@ -39,22 +41,36 @@ export default function Register() {
       })
 
       if (response.ok) {
-        alert('User registered')
+        toast('User registered')
       }
       if (!response.ok) {
         console.log(response)
         if (response.status === 400) {
-          alert('Email already in use')
+          toast('Email already in use')
+          router.push('/')
         }
       }
     } catch (error) {
       console.error('Error:', error.message)
-      setErrMsg('Network error occurred')
     }
   }
   return (
     <div className='flex justify-center items-center h-screen'>
-      <div class='container'>
+      <ToastContainer
+        position='top-right'
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
+      {/* Same as */}
+      <ToastContainer />
+      <div className='container'>
         <h2>Worker Registration Form</h2>
         <form id='workerForm' onSubmit={handleClick} method='POST'>
           <ul id='progressbar'>
